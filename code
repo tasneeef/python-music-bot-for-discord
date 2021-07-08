@@ -1,0 +1,117 @@
+import discord
+from discord.ext.commands import Bot
+from PIL import Image
+from io import BytesIO
+from discord.ext import commands
+from discord import FFmpegPCMAudio
+import requests
+import random
+import json
+import tracemalloc
+
+tracemalloc.start()
+
+bot = Bot("!!")
+
+def check(ctx):
+    return lambda m: m.author == ctx.author and m.channel == ctx.channel
+
+async def get_input_of_type(func, ctx):
+    while True:
+        try:
+            msg = await bot.wait_for('message', check=check(ctx))
+            return func(msg.content)
+        except ValueError:
+            continue
+
+@bot.command()
+async def quiz(ctx):
+    quizFile = open('playlist.csv',"r")
+    quizData = quizFile.readlines()
+    random.shuffle(quizData)
+    channel = ctx.message.author.voice.channel
+    voice = await channel.connect()
+    await ctx.send('starting music quiz')
+    for i in range(5):
+        x = quizData[i].strip()
+        data = x.split(",")
+        question = data[0]
+        CorrectAnswer = data[1]
+        print('starting music quiz')
+        print('playing music')
+        await ctx.send('playing music')
+        str(question)
+        source = FFmpegPCMAudio(question)
+        print(question)
+        player = voice.play(source)
+        await ctx.send("enter the song name")
+        height = await get_input_of_type(str, ctx)
+        if height == CorrectAnswer:
+            await ctx.send("Correct!")
+        else:
+            await ctx.send("Incorrect.")
+            await ctx.send("Correct answer should be: "+CorrectAnswer)
+
+@bot.command(pass_context = True)
+async def leave(ctx):
+    if(ctx.voice_client):
+        await ctx.guild.voice_client.disconnect()
+        await ctx.send("left voice channel")
+    else:
+        await ctx.send("i am not in a voice channel")
+
+@bot.command()
+async def bmi(ctx):
+    await ctx.send("enter your height in cms")
+    height = await get_input_of_type(int, ctx)
+    await ctx.send("enter your weight in kg")
+    weight = await get_input_of_type(int, ctx)
+
+    BMI = weight / (height/100)**2
+    if BMI <= 18.4:
+        await ctx.send(f"your bmi is {BMI} and you are a patlu")
+        with open('C:\\Users\\umang\\Desktop\\icons\\patlu.png', 'rb') as f:
+            picture = discord.File(f)
+        await ctx.send(file=picture)
+        await ctx.send(file=discord.File('patlu.png'))
+    elif BMI <= 24.9: 
+        await ctx.send(f"your bmi is {BMI} and you are healthy chad") 
+        with open('C:\\Users\\umang\\Desktop\\icons\\chad.jpg', 'rb') as f: 
+            picture = discord.File(f) 
+        await ctx.send(file=picture) 
+        await ctx.send(file=discord.File('chad.jpg')) 
+    else: 
+        await ctx.send(f"your bmi is {BMI} and you are a motu") 
+        with open('C:\\Users\\umang\\Desktop\\icons\\Profile_motu2.png', 'rb') as f: 
+            picture = discord.File(f) 
+        await ctx.send(file=picture) 
+        await ctx.send(file=discord.File('Profile_motu.png'))   
+
+@bot.command()
+async def game(ctx):
+    randnumber = random.randint(1,100)
+    userguess=None
+    print(randnumber)
+    guesses=0
+
+    while(userguess != randnumber):  
+        await ctx.send("enter a number")
+        userguess = await get_input_of_type(int, ctx)
+        guesses+=1
+        if(userguess==randnumber):
+            await ctx.send("YAYYYY! you guessed it right")
+        else:
+            if(userguess>randnumber):
+                await ctx.send("WRONG! try smaller")
+            else:
+                await ctx.send("WRONG! try bigger")      
+    await ctx.send(f"you guessed the number in {guesses} guesses")
+    with open("hiscore.txt","r") as f:
+        hiscore=int(f.read())
+    if(guesses<hiscore):
+        await ctx.send("you have just broken the highscore!")   
+        with open("hiscore.txt","w") as f:
+            f.write(str(guesses))
+
+
+bot.run('ODM0MDAxOTczMTExNTU0MTE4.YH6i3Q.OXzuSHdvA7-cEgDbZquFQG9U6hE')   
