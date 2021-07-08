@@ -114,4 +114,4 @@ async def game(ctx):
             f.write(str(guesses))
 
 
-bot.run('ODM0MDAxOTczMTExNTU0MTE4.YH6i3Q.OXzuSHdvA7-cEgDbZquFQG9U6hE')   
+bot.run('token')   
