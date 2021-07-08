@@ -1,1 +1,1 @@
-# python-music-bot-for-discord
+This is my first project on github. It is a bot for the popular voice chatting application discord. This bot can help the users play a song quiz where it plays a song and the user has to guess the name, it can also provide inputs if the song name is incorrect and provide the correct name. It also has sevral other features likes calculating BMI or playing a game of hot and cold. To run this bot, you need to have a csv file with paths of all the songs on your machine, and a software called ffmpeg installed.
