@@ -1,6 +1,7 @@
 Music Quiz Discord Bot 
 
 Features:
+
 Music Quiz:
 Start a music quiz session where the bot plays snippets of songs and users have to guess the song name. The bot shuffles a playlist and plays a snippet of each song for the quiz. Users are prompted to enter their guesses, and the bot validates the answers.
 
@@ -20,8 +21,3 @@ Use the command !!bmi to start the BMI calculation process. Provide your height 
 
 Number Guessing Game:
 Use the command !!game to start the number guessing game. Guess numbers within the specified range and receive feedback until you guess correctly. Your number of guesses will be tracked, and you might break the high score!
-
-Dependencies:
-discord.py
-PIL (Python Imaging Library)
-requests
