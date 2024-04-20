@@ -6,7 +6,7 @@ Music Quiz:
 Start a music quiz session where the bot plays snippets of songs and users have to guess the song name. The bot shuffles a playlist and plays a snippet of each song for the quiz. Users are prompted to enter their guesses, and the bot validates the answers.
 
 BMI Calculator:
-Calculate Body Mass Index (BMI) based on user-provided height and weight. Classify users into different BMI categories (patlu, motu or healthy chad) and provide corresponding messages and images. Images include representations of the mentioned characters.
+Calculate Body Mass Index (BMI) based on user-provided height and weight. Classify users into different BMI categories and provide corresponding messages and images. Images include representations of the mentioned BMI categories.
 
 Number Guessing Game:
 Initiate a number guessing game where users try to guess a randomly generated number between 1 and 100. Users are provided feedback based on their guesses (smaller or bigger). The bot tracks the number of guesses and maintains a high score.
